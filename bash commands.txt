@@ -1,0 +1,40 @@
+1.To Change the permissions of your .pem file:
+
+icacls "nextwork-keypair.pem" /reset
+icacls "nextwork-keypair.pem" /grant:r "USERNAME:R"
+icacls "nextwork-keypair.pem" /inheritance:r
+
+
+2.To connect your EC2 instance to VSCode: 
+
+ssh -i [PATH TO YOUR .PEM FILE] ec2-user@[YOUR PUBLIC IPV4 DNS]
+
+3.To Install Apache Maven
+
+wget https://archive.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
+sudo tar -xzf apache-maven-3.5.2-bin.tar.gz -C /opt
+echo "export PATH=/opt/apache-maven-3.5.2/bin:$PATH" >> ~/.bashrc
+source ~/.bashrc
+
+4.To install Java 8, or more specifically, Amazon Correto 8:
+
+sudo dnf install -y java-1.8.0-amazon-corretto-devel
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-amazon-corretto.x86_64
+export PATH=/usr/lib/jvm/java-1.8.0-amazon-corretto.x86_64/jre/bin/:$PATH
+
+5.To verify that Maven is installed correctly:
+
+mvn -v
+
+6.To verify that you've installed Java 8 correctly:
+
+java -version
+
+7.Use mvn to generate a Java web app. To do this, use these commands:
+
+mvn archetype:generate \
+   -DgroupId=com.nextwork.app \
+   -DartifactId=nextwork-web-project \
+   -DarchetypeArtifactId=maven-archetype-webapp \
+   -DinteractiveMode=false
+   
